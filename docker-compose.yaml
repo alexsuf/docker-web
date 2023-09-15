@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  web:
+    image: alexsuf/web
+    container_name: web
+    restart: always
+    environment:
+      TZ: Europe/Moscow
+    ports:
+      - "80:80"
+    volumes:
+      - ./HTML:/usr/share/nginx/html
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
